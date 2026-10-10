@@ -184,8 +184,7 @@
 }
 
 
-
-
+/* ---------- Heading ---------- */
 .heading1 {
   text-align: center;
   font-size: 2.2rem;
@@ -193,7 +192,82 @@
   margin-bottom: 8px;
 }
 
+/* ---------- Add-todo form ---------- */
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 700px;
+  margin: 20px auto 28px;
+  padding: 20px;
+  background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+  border: 1px solid #444;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 
+.todo-form label {
+  color: #ddd;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+}
+
+.todo-form input,
+.todo-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #111;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-form input::placeholder,
+.todo-form textarea::placeholder {
+  color: #777;
+}
+
+.todo-form input:focus,
+.todo-form textarea:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+}
+
+.btn-add {
+  margin-top: 14px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  background: #4caf50;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.btn-add:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-add:active {
+  transform: scale(0.96);
+}
+
+.empty-message {
+  text-align: center;
+  color: #999;
+}
+
+/* ---------- Todo row (category + card) ---------- */
 .sidebar {
   display: flex;
   align-items: stretch;
@@ -214,6 +288,7 @@
   }
 }
 
+/* ---------- Category label ---------- */
 .sidebar-item {
   width: 140px;
   flex-shrink: 0;
@@ -224,6 +299,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 0 8px;
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 1.5px;
@@ -231,6 +308,7 @@
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  overflow-wrap: anywhere;
 }
 
 .sidebar-item:hover {
@@ -239,6 +317,7 @@
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
+/* ---------- Todo card ---------- */
 .todo {
   flex: 1;
   background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
@@ -267,10 +346,13 @@
   margin: 0 0 16px 0;
   color: #bbb;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
+/* ---------- Todo buttons ---------- */
 .btn-open,
-.btn-complete {
+.btn-complete,
+.btn-delete {
   margin-right: 8px;
   padding: 8px 18px;
   border: none;
@@ -290,67 +372,32 @@
   background: #2196f3;
 }
 
+.btn-delete {
+  background: #e53935;
+}
+
 .btn-open:hover,
-.btn-complete:hover {
+.btn-complete:hover,
+.btn-delete:hover {
   filter: brightness(1.12);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .btn-open:active,
-.btn-complete:active {
+.btn-complete:active,
+.btn-delete:active {
   transform: scale(0.96);
 }
 
 .btn-open:focus-visible,
 .btn-complete:focus-visible,
-.heading1 ~ select:focus-visible,
-.heading1 ~ select + button:focus-visible {
+.btn-delete:focus-visible,
+.btn-add:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
 
-.heading1 ~ select {
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin: 16px auto 10px;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: white;
-  color: #333;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.heading1 ~ select + button {
-  display: block;
-  margin: 0 auto 28px;
-  padding: 10px 24px;
-  border: none;
-  border-radius: 8px;
-  background: #e53935;
-  color: white;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: filter 0.2s ease, transform 0.1s ease;
-}
-
-.heading1 ~ select + button:hover:not(:disabled) {
-  filter: brightness(1.12);
-}
-
-.heading1 ~ select + button:active:not(:disabled) {
-  transform: scale(0.96);
-}
-
-.heading1 ~ select + button:disabled {
-  background: #777;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
+/* ---------- Small screens ---------- */
 @media (max-width: 600px) {
   .sidebar {
     flex-direction: column;
@@ -360,5 +407,10 @@
   .sidebar-item {
     width: 100%;
     padding: 10px 0;
+  }
+
+  .todo-form {
+    margin-left: 12px;
+    margin-right: 12px;
   }
 }
